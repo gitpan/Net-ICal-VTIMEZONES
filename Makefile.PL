@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 # Makefile.PL for Net::ICal::VTIMEZONES
-# $Id: Makefile.PL,v 1.6 2001/11/25 16:25:16 srl Exp $
+# $Id: Makefile.PL,v 1.7 2001/11/25 23:04:42 srl Exp $
 # 
 use strict;
 use ExtUtils::MakeMaker;
@@ -46,7 +46,7 @@ not expect.
 
 WriteMakefile(
 		'MAKEFILE'=> 'Makefile',
-		'VERSION' => '0.01',
+		'VERSION' => '0.02',
 		'NAME'    => 'Net::ICal::VTIMEZONES', 
        	'PM' => 
            {'lib/Net/ICal/Config.pm' => '$(INST_LIBDIR)/Config.pm',

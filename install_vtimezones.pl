@@ -9,7 +9,7 @@
 # Options:
 #  --prefix=dirname   installs vtimezones in $prefix/zoneinfo.
 #
-$VERSION = (qw'$Revision: 1.2 $')[1];
+$VERSION = (qw'$Revision: 1.4 $')[1];
 
 use strict;
 use File::Copy;
@@ -32,7 +32,7 @@ my $prefix = "";
 GetOptions ('prefix=s' => \$prefix);
 $prefix ||= '/usr/local/share';
 
-my $DEST_LOCATION = "$prefix/zoneinfo";
+my $DEST_LOCATION = "$prefix/reefknot/zoneinfo";
 my $SOURCE_LOCATION = 'zoneinfo';                
 
 if (exists $unices{$OS}) {
@@ -79,6 +79,9 @@ Thanks---
 Please read the README file and report a bug. Let us know
 what OS you're using and where that OS likes to have 
 shared data files put, and we'll get this fixed for you.
+Additionally, you should let us know that your OS reports                            
+itself as '$OS'.
+
 Thanks---
                        The Reefknot team 
 ";
@@ -123,8 +126,14 @@ sub install_vtimezones {
     my ($srcdir, $destdir) = @_;
     print "Installing VTIMEZONE files in $destdir.\n";
     if ($destdir && (! -d $destdir)) {
+        $destdir =~ m:(.*)/[^/]+:;
+        my $destdirparent = $1;
+        unless (-d $destdirparent) {
+            mkdir $destdirparent 
+                or die "Couldn't create $destdirparent;";
+        }
         print "Creating $destdir...\n";
-        mkdir $destdir or die "Couldn't create $destdir";
+        mkdir $destdir or die "Couldn't create $destdir;";
         # should we have some chmod magic here?
     }
     opendir(DIR, $srcdir) or 
